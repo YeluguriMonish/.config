@@ -1,0 +1,102 @@
+[colors]
+background = #263238
+foreground = #abb2bf
+module-background = #676f73
+
+[module/time]
+type = custom/script
+exec = date '+%m/%d/%Y %H:%M:%S'
+interval = 1 
+format-prefix = " "
+format-underline = ${colors.module-background}
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+
+format = <label> <bar-used>
+format-prefix = "ﳚ "
+format-underline = ${colors.module-background}
+
+label = %gb_used%/%gb_free%
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 50
+bar-used-foreground-0 = #61afef
+bar-used-foreground-1 = #70b7f0
+bar-used-foreground-2 = #80bff2
+bar-used-foreground-3 = #90c7f3
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+; Only applies if <ramp-free> is used
+ramp-free-0 = ▁
+ramp-free-1 = ▂
+ramp-free-2 = ▃
+ramp-free-3 = ▄
+ramp-free-4 = ▅
+ramp-free-5 = ▆
+ramp-free-6 = ▇
+ramp-free-7 = █
+
+[module/cpu]
+type = internal/cpu
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label> <ramp-coreload>
+
+label = %percentage%%
+format-prefix = " "
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+
+format-underline = ${colors.module-background}
+
+[module/info-hlwm-workspaces]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-hlwm-workspaces.sh
+tail = true
+scroll-up = herbstclient use_index -1 --skip-visible &
+scroll-down = herbstclient use_index +1 --skip-visible &
+
+[bar/main]
+; Background ARGB color
+background = ${colors.background}
+; Foreground ARGB color
+foreground = ${colors.foreground}
+separator = "   "
+font-0 = Iosevka:size=14:style=Regular
+modules-right = cpu memory time 
+modules-left = info-hlwm-workspaces
+line-size = 3
