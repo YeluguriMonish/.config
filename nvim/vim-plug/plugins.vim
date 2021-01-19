@@ -35,5 +35,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mhinz/vim-signify'
     " Git integration for neovim
     Plug 'tpope/vim-fugitive'    
-    
+    " Latex integration for neovim
+    Plug 'lervag/vimtex'
+    " Prettier code formatter
+    Plug 'sbdchd/neoformat'
+
     call plug#end()
